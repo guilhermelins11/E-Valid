@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Valid</title>
+    <link rel="stylesheet" href="../static/styles.css"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div id="emissor">
+        
+        <div id="formulario-dados">
+                <h1>E-Valid</h1>
+            <h2>Dados para Inclusão no Certificado</h2>
+            
+            <input type="text" id="nome-aluno" placeholder="Nome Completo do Participante">
+            <input type="text" id="nome-curso" placeholder="Nome do Curso/Evento">
+            <input type="text" id="carga-horaria" placeholder="Carga Horária">
+            <input type="text" id="nome-coordenador" placeholder="Nome do Coordenador">
+            
+            <input type="text" id="titulo-certificado" placeholder="Título Principal">
+            <textarea id="descricao-curso" placeholder="Descreva o curso"></textarea>
+
+            <div class="input-row">
+                <div class="input-col">
+                    <label for="cor-borda" class="form-label-custom">Cor da Borda:</label>
+                    <input type="color" id="cor-borda" value="#5e35b1" class="form-control-custom color-input">
+                </div>
+
+                <div class="input-col">
+                    <label for="upload-logo" class="form-label-custom">Escolher Logo (PNG/JPG):</label>
+                    <input type="file" id="upload-logo" accept="image/png, image/jpeg" class="form-control-custom file-input">
+                </div>
+
+                <div class="input-col">
+                    <label for="upload-sobreposicao" class="form-label-custom">Imagem de Fundo Dinâmica</label>
+                    <input type="file" id="upload-sobreposicao" accept="image/png, image/jpeg" class="form-control-custom file-input">
+                </div>
+            </div>
+            
+            <div id="batch-control" style="margin-top: 30px; padding: 15px; border: 1px dashed #5e35b150; border-radius: 5px;">
+                <h3>Geração em Lote (Planilha Excel/CSV)</h3>
+                <p>Faça o upload de uma planilha com a lista de participantes.</p>
+
+                <div class="input-col" style="width: 100%; margin-bottom: 20px;">
+                    <label for="upload-csv" class="form-label-custom">Upload do Arquivo Planilha (.xlsx, .xls, .csv):</label>
+                    <input 
+                    type="file" 
+                    id="upload-csv" 
+                    accept=".xlsx, .xls, .csv" 
+                    class="form-control-custom file-input">
+                </div>
+
+                <div id="mapping-interface" style="display: none; padding: 10px; background-color: #f7fff7; border-radius: 4px;">
+                    <h4>Mapeamento de Colunas</h4>
+                    <p>Selecione a coluna da planilha para cada campo.</p>
+
+                    <label for="map-nome-aluno" class="form-label-custom">Nome do Aluno:</label>
+                    <select id="map-nome-aluno" class="form-control-custom"></select>
+        
+                    <label for="map-nome-curso" class="form-label-custom">Nome do Curso (Opcional):</label>
+                    <select id="map-nome-curso" class="form-control-custom"></select>
+                    
+                    <label for="map-carga-horaria" class="form-label-custom">Carga Horária (Opcional):</label>
+                    <select id="map-carga-horaria" class="form-control-custom"></select>
+
+                    <label for="map-titulo-certificado" class="form-label-custom">Título Principal (Opcional):</label>
+                    <select id="map-titulo-certificado" class="form-control-custom"></select>
+
+                    <label for="map-nome-coordenador" class="form-label-custom">Nome do Coordenador (Opcional):</label>
+                    <select id="map-nome-coordenador" class="form-control-custom"></select> 
+
+                    <button class="btn btn-primary" onclick="iniciarGeracaoEmLote()" style="margin-top: 15px;">
+                        Gerar TODOS os Certificados
+                    </button>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <button class="btn btn-success" onclick="gerarCertificado()">
+                    Gerar Visualização
+                </button>
+
+                <button class="btn btn-primary" onclick="baixarCertificado()">
+                    Baixar Certificado (PNG)
+                </button>
+            </div>
+        </div> 
+        
+        <div id="certificado">
+            <div class="certificado-modelo" id="modelo-certificado">
+                
+                <img id="logo-certificado" class="logo-certificado" style="display: none;" alt="Logo do Certificado">
+                
+                <p>A Confederação de Ligas Academicas concede este</p>
+                
+                <h1 id="campo-titulo">Certificado de Conclusão/Comparecimento</h1>
+                
+                <p>Ao Aluno</p>
+                <h2 id="campo-aluno" class="certificado-nome">NOME DO ALUNO</h2>
+                
+                <p id="campo-descricao">pela conclusão bem-sucedida do curso de</p>
+                
+                <h3 id="campo-curso">NOME DO CURSO</h3>
+                
+                <p>com carga horária de <strong id="campo-carga-horaria">8 HORAS</strong>.</p>
+                <p style="margin-top: 50px;">Certificado emitido por:</p>
+                <p style="font-weight: bold;" id="campo-coordenador">Coordenador CHARLES ROTRON</p>
+
+                </div>
+        </div>
+    </div>
+    
+    <script src="../scripts/emissao.js"></script>
+</body>
+</html>
