@@ -9,13 +9,12 @@ function gerarCertificado() {
     const novoTitulo = document.getElementById('titulo-certificado').value;
     const novaDescricao = document.getElementById('descricao-curso').value;
 
-    document.getElementById('campo-titulo').textContent = novoTitulo.toUpperCase() || 'CERTIFICADO DE MÉRITO';
-    document.getElementById('campo-descricao').textContent = novaDescricao || 'pela conclusão bem-sucedida do curso de';
+    document.getElementById('campo-titulo').textContent = novoTitulo.toUpperCase() || 'CERTIFICADO DE CONCLUSÃO/COMPARECIMENTO';
+    document.getElementById('campo-descricao').textContent = novaDescricao || 'pela participação no evento/curso/palestra de';
     document.getElementById('campo-aluno').textContent = nomeAluno.toUpperCase() || 'NOME DO ALUNO';
-    document.getElementById('campo-curso').textContent = nomeCurso.toUpperCase() || 'NOME DO CURSO';
-
-    document.getElementById('campo-carga-horaria').textContent = cargaHoraria || '8 HORAS';
-    document.getElementById('campo-coordenador').textContent = 'Coordenador ' + (nomeCoordenador || 'CHARLES ROTRON').toUpperCase();
+    document.getElementById('campo-curso').textContent = nomeCurso.toUpperCase() || 'NOME DO EVENTO/CURSO'
+    document.getElementById('campo-carga-horaria').textContent = cargaHoraria + ' Horas';
+    document.getElementById('campo-coordenador').textContent = 'Coordenador(a) ' + (nomeCoordenador || 'Charles Rotron').toUpperCase();
     
     document.getElementById('modelo-certificado').style.borderColor = corBorda;
     document.getElementById('certificado').style.display = 'block';
